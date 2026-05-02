@@ -29,7 +29,7 @@ async function supabaseQuery<T>(query: string, params: unknown[] = []): Promise<
       'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
       'Prefer': 'return=representation'
     },
-    body: JSON.stringify({ params: params.reduce((acc, p, i) => ({ ...acc, [`p${i}`]: p }), {}) })
+    body: JSON.stringify({ params: params.reduce((acc: Record<string, unknown>, p, i) => ({ ...acc, [`p${i}`]: p }), {}) })
   });
 
   if (!response.ok) {
